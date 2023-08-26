@@ -1,0 +1,23 @@
+public class Solution {
+    public IList<int> FindDisappearedNumbers(int[] nums) {
+        var numsDict = nums.Distinct().ToDictionary(k => k, v => v);
+        int length = nums.Length;
+        
+        List<int> remainNums = new List<int>();
+
+        int i = 0;
+        while(i < length)
+        {
+            i++;
+            
+            numsDict.TryGetValue(i, out var num);
+            if (num != 0)
+            {
+                continue;
+            }
+            
+            remainNums.Add(i);
+        }
+        return remainNums;
+    }
+}
