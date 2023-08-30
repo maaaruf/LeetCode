@@ -1,0 +1,38 @@
+public class Solution {
+    public bool IsAnagram(string s, string t) {
+        if (s.Length != t.Length)
+        return false;
+        
+        var sCharWiseCount = getCharWiseCount(s);
+        var tCharWiseCount = getCharWiseCount(t);
+
+        foreach (var item in sCharWiseCount)
+        {
+            tCharWiseCount.TryGetValue(item.Key, out var tCount);
+
+            if (tCount != item.Value)
+                return false;
+        }
+
+        return true;
+    }
+
+    public Dictionary<char, int> getCharWiseCount(string input){
+        var charWiseCount = new Dictionary<char, int>();
+        for (int i = 0; i < input.Length; i++)
+        {
+            if (ContainsKey(charWiseCount, input[i]))
+                continue;
+
+            var count = input.Count(x => x == input[i]);
+            charWiseCount.Add(input[i], count);
+        }
+
+        return charWiseCount;
+    }
+
+    public bool ContainsKey(Dictionary<char, int> dictionary, char expectedKey)
+    {
+        return dictionary.TryGetValue(expectedKey, out var actualValue);
+    }
+}
