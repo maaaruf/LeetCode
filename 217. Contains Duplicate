@@ -1,0 +1,9 @@
+public class Solution {
+    public bool ContainsDuplicate(int[] nums) {
+        var distinctArray = nums.Distinct();
+
+        if(nums.Length == distinctArray.Count())
+            return false;
+        return true;
+    }
+}
