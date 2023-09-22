@@ -1,0 +1,20 @@
+public class Solution {
+    public int[] TwoSum(int[] nums, int target) {
+        var numsWithIndex = new Dictionary<int, int>();        
+        
+        for (int i = 0; i<nums.Length; i++){
+            //numsWithIndex.TryGetValue(nums[i], out var currentNum);
+            var isRequiredNumFound = numsWithIndex.TryGetValue(target - nums[i], out var requiredNumIndex);
+
+            if (isRequiredNumFound)
+                return new int[] {i, requiredNumIndex};
+
+            var isDuplicate = numsWithIndex.TryGetValue(nums[i], out var _);
+            
+            if(!isDuplicate)
+                numsWithIndex.Add(nums[i], i);
+        }
+
+        return new int[] {-1, -1};
+    }
+}
